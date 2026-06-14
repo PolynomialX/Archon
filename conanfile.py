@@ -10,7 +10,7 @@ class archon(ConanFile):
     author = "Robin Andrew Holt"
     url = "https://github.com/PolynomialX/Archon"
     settings = "os", "compiler", "arch", "build_type"
-    package_type = "executable"
+    package_type = "application"
 
     def generate(self):
         # This was required for my machine...
