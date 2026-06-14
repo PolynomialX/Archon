@@ -9,7 +9,7 @@ class archon(ConanFile):
     description = """Archon - A C++ OpenGL Hobby Engine"""
     author = "Robin Andrew Holt"
     url = "https://github.com/PolynomialX/Archon"
-    settings = "os", "arch", "build_type"
+    settings = "os", "compiler", "arch", "build_type"
 
 
     def generate(self):
@@ -22,7 +22,7 @@ class archon(ConanFile):
         deps.generate()
 
     def layout(self):
-        cmake_layout(self, generator="Ninja")
+        cmake_layout(self)
 
     def build_requirements(self):
         self.tool_requires("cmake/4.0.2")
