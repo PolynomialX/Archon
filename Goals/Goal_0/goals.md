@@ -11,3 +11,15 @@ and let people grab it! \
 Checklist
 - [ ] Conanfile
     - [x] Dependencies described
+    - [ ] Project layout described
+    - [ ] Build process described
+    - [x] Metadata described
+    - [ ] Package creation described
+- [x] CMakeLists.txt
+
+- [x] VSCode project files\
+Had to add the c_cpp_properties.json & point to conan cache for intellisense to pick up external headers.
+
+- [ ] Testing
+    - [ ] Fresh clone, build & intellisense checked
+    - [ ] Describe Archon as a dependency and see if we can build from source & pull in built binary.
