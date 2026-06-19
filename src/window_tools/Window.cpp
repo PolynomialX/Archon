@@ -10,18 +10,26 @@ Window::Window(int width_,
     title(title_),
     window(nullptr)
 {
+    
     window = glfwCreateWindow(width,
-                              height,
-                              title.c_str(),
-                              NULL,
-                              NULL);
+                            height,
+                            title.c_str(),
+                            NULL,
+                            NULL);
+
     // Check for faults
     if(window == nullptr)
     {
         std::string errorMsg = 
         "Failed to create window for the following config: ";
-        throw std::runtime_error(errorMsg << *this);
+        std::stringstream ss;
+        ss << errorMsg << *this;
+        throw std::runtime_error(ss.str());
     }
+
+    // Print out window config
+    std::cout << "Created window with config: \n"
+    << *this << std::endl;
 }
 
 Window::~Window()
@@ -34,9 +42,26 @@ int Window::getWidth() const
     return width;
 }
 
+void Window::setWidth(int width_)
+{
+    this->width = width_;
+    glfwMakeContextCurrent(this->getWindow());
+    glfwSetWindowSize(this->window, width, height);
+    glViewport(0, 0, width, height);
+}
+
 int Window::getHeight() const
 {
     return height;
+}
+
+void Window::setHeight(int height_)
+{
+    this->height = height_;
+    glfwMakeContextCurrent(this->getWindow());
+    glfwSetWindowSize(this->window, width, height);
+    glViewport(0, 0, width, height);
+    
 }
 
 std::string Window::getTitle() const
@@ -44,12 +69,12 @@ std::string Window::getTitle() const
     return title;
 }
 
-const GLFWwindow * const Window::getWindow() const
+GLFWwindow * Window::getWindow()
 {
     return window;
 }
 
-std::ostream& Window::operator<<(std::ostream& os_,
+std::ostream& operator<<(std::ostream& os_,
                                  const Window& window_)
 {
     std::string windowConfigStr;
@@ -61,7 +86,9 @@ std::ostream& Window::operator<<(std::ostream& os_,
     window_.getTitle(),
     window_.getWidth(),
     window_.getHeight());
-
+    return os_ << windowConfigStr;
 }
+
+
 
 } // archon

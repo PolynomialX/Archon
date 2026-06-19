@@ -6,6 +6,8 @@
 #include <string>
 #include <format>
 #include <exception>
+#include <sstream>
+#include <iostream>
 /**
  * @class Window
  *  Used to encapsulate attributes for a window to render to
@@ -22,9 +24,11 @@ public:
 
     // Getters & setters
     int getWidth() const;
+    void setWidth(int width_);
     int getHeight() const;
+    void setHeight(int height_);
     std::string getTitle() const;
-    const GLFWwindow * const getWindow() const;
+    GLFWwindow * getWindow();
 
     // Used to print out config
     friend std::ostream& operator<<(std::ostream& os_, 

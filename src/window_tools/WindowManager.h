@@ -8,6 +8,7 @@
 #include <iostream>
 #include <vector>
 #include <exception>
+#include <unordered_map>
 #include "Window.h"
 namespace archon
 {
@@ -22,6 +23,12 @@ public:
     WindowManager();
     virtual ~WindowManager();
 
+    /**
+     * @brief getWindow
+     *  Currently returns a reference to a desired window
+     * @param title_ - title of desired window
+     */
+    Window& getWindow(const std::string& title_);
 private:
 
     bool initGLAD();
@@ -35,6 +42,7 @@ private:
             int height);
     
     std::vector<Window> windows;
+    std::unordered_map<std::string, std::size_t> windowMap;
 };
 
 } // archon
