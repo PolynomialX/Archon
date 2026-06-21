@@ -29,3 +29,28 @@ conan build . --build=missing -s build_type=<BUILD_TYPE>
 Currently this has only been tested on my machine (64-bit Windows, MSVC).
 
 Testing on other archs / OS's is planned.
+
+# Repository Structure
+
+## .vscode
+Contains vscode config files for debugging & intellisense
+## Assets
+TBD
+## build
+Generated upon building the library. \
+Holds built binaries.
+## examples
+### 0_link_example
+Simple example to show that the project can be linked into an application & can be consumed via Conan. \
+No functionality here just focuses on the build & dependency system implemented. \
+
+## generators
+Artefacts generated via Conan. 
+## include
+Header files needed for Archon.
+## src
+Holds the implementation files for Archon.
+## CMakeLists.txt
+Instructs CMake how to compile the library.
+## conanfile.py
+Describes the dependenies needed by Conan & how to build / package the library.
