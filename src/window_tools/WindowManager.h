@@ -17,6 +17,8 @@ namespace archon
      * @class WindowManager
      *  Aims to orchestrate the creation, management
      * & destruction of windows.
+     * Note, further development may be needed for multiple windows concurrently.
+     * This is merely a step in that direction.
      */
 class WindowManager
 {
