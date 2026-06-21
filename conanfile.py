@@ -3,14 +3,23 @@ from conan.tools.cmake import CMakeToolchain
 from conan.tools.cmake import CMakeDeps
 from conan.tools.cmake import cmake_layout
 from conan.tools.cmake import CMake
+from conan.tools.files import get
 
 class archon(ConanFile):
     name = "archon"
+    version = "0.0.1"
     description = """Archon - A C++ OpenGL Hobby Engine"""
     author = "Robin Andrew Holt"
     url = "https://github.com/PolynomialX/Archon"
     settings = "os", "compiler", "arch", "build_type"
-    package_type = "application"
+    exports_sources = ["CMakeLists.txt", "src/*", "include/*"]
+    options = {"shared": [True, False], "fPIC": [True, False]}
+    default_options = {"shared": False, "fPIC": True}
+    package_type = "library"
+    def source(self):
+        # Grab source from interwibble
+        get(self, "https://github.com/PolynomialX/Archon/archive/refs/heads/main.zip",
+            strip_root=True)
 
     def generate(self):
         # This was required for my machine...
@@ -23,7 +32,7 @@ class archon(ConanFile):
 
     def layout(self):
         cmake_layout(self)
-
+        
     def build_requirements(self):
         self.tool_requires("cmake/4.0.2")
 
@@ -42,3 +51,6 @@ class archon(ConanFile):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
+
+    def package_info(self):
+        self.cpp_info.libs=["archon"]

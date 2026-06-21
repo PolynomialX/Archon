@@ -1,10 +1,10 @@
 cmake_minimum_required(VERSION 3.23)
-project(Archon)
+project(archon)
 set(CMAKE_CXX_STANDARD 20)
 find_package(glfw3 REQUIRED)
 find_package(glad REQUIRED)
 
-add_library(Archon)
+add_library(${PROJECT_NAME})
 #add_executable(Archon)
 
 target_sources(${PROJECT_NAME}
@@ -22,4 +22,5 @@ target_link_libraries(${PROJECT_NAME}
             glfw
             opengl::opengl
             glad::glad)
-        
+
+install(TARGETS ${PROJECT_NAME})
