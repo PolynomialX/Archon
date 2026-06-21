@@ -11,37 +11,55 @@ WindowManager::WindowManager()
     glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
     glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
-    windows.push_back(Window(800, 600, "Greebles"));
-    windowMap["Greebles"] = 0;
-    if(windows[0].getWindow() == NULL)
-    {
-        std::cout << "Failed to create GLFW window" << std::endl;
-        glfwTerminate();
-        throw std::runtime_error("Failed to create GLFW window");
-    }
-    // Needed before initing GLAD
-    glfwMakeContextCurrent(windows[0].getWindow());
-    bool gladInitSuccess = initGLAD();
-    if(!gladInitSuccess)
-    {
-        throw std::runtime_error("Failed to initialise GLAD");
-    }
-
-    // Tell OpenGL the size of the rendering window
-    glViewport(0,
-         0,
-         800, 
-         600);
-
-    glfwSetFramebufferSizeCallback(windows[0].getWindow(), framebuffer_size_callback);
-    
-
 }
 
 
 WindowManager::~WindowManager()
 {
     std::cout << "Destructing an instance of WindowManager\n";
+}
+
+
+void WindowManager::createWindow(const std::string& title_,
+                    int width_,
+                    int height_)
+{
+    // Add to vector & map
+    windows.push_back(Window(width_, height_, title_));
+    const std::size_t windowIdx = windows.size() - 1;
+    windowMap[title_] = windowIdx;
+    if(windows[windowIdx].getWindow() == NULL)
+    {
+        std::cout << "Failed to create GLFW window" << std::endl;
+        glfwTerminate();
+        throw std::runtime_error("Failed to create GLFW window");
+    }
+
+    // The order of this is important - must change context
+    glfwMakeContextCurrent(windows[windowIdx].getWindow());
+    // Then init glad
+    bool gladInitSuccess = initGLAD();
+    if(!gladInitSuccess)
+    {
+        throw std::runtime_error("Failed to initialise GLAD");
+    }
+    // then we can call opengl functions
+    glViewport(0, 0, windows[windowIdx].getWidth(), windows[windowIdx].getHeight());
+    // Set callback function
+    glfwSetFramebufferSizeCallback(windows[windowIdx].getWindow(), framebuffer_size_callback);
+}
+
+void WindowManager::setWindowContext(const std::string& title_)
+{
+    auto search = windowMap.find(title_);
+    if(search == windowMap.end())
+    {
+        throw std::runtime_error("ERROR::WINDOW_MANAGER::SET_WINDOW_CONTEXT::"
+                                 " CANNOT FIND WINDOW WITH TITLE: " + title_);
+    }
+    const std::size_t windowIdx = search->second;
+    glfwMakeContextCurrent(windows[windowIdx].getWindow());
+    glViewport(0, 0, windows[windowIdx].getWidth(), windows[windowIdx].getHeight());
 }
 
 Window& WindowManager::getWindow(const std::string& title_)

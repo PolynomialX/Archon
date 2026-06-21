@@ -11,13 +11,13 @@ int main()
 {
     std::cout << "Hello Archon" << std::endl;
     archon::WindowManager windowManager;
-    std::this_thread::sleep_for(std::chrono::seconds(5));
-    auto& greeblesWindow = windowManager.getWindow("Greebles");
-    greeblesWindow.setHeight(1000);
-    greeblesWindow.setWidth(500);
-    while(!glfwWindowShouldClose(greeblesWindow.getWindow()))
+    windowManager.createWindow("Greebles", 1000, 1000);
+
+    // We need threading to handle multiple windows at once but the code is here.
+    // We will focus on just rendering to a singular window for the time being.
+    while(!glfwWindowShouldClose(windowManager.getWindow("Greebles").getWindow()))
     {
-        glfwSwapBuffers(greeblesWindow.getWindow());
+        glfwSwapBuffers(windowManager.getWindow("Greebles").getWindow());
         glfwPollEvents();
     }
     return 0;
