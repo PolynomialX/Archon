@@ -4,7 +4,8 @@ set(CMAKE_CXX_STANDARD 20)
 find_package(glfw3 REQUIRED)
 find_package(glad REQUIRED)
 
-add_executable(Archon)
+add_library(Archon)
+#add_executable(Archon)
 
 target_sources(${PROJECT_NAME}
     PRIVATE
@@ -13,12 +14,11 @@ target_sources(${PROJECT_NAME}
         src/window_tools/Window.cpp)
 
 target_include_directories(${PROJECT_NAME}
-    PRIVATE
-    src
-    src/window_tools)
+    PUBLIC
+    include)
 
 target_link_libraries(${PROJECT_NAME}
-        PRIVATE
+        PUBLIC
             glfw
             opengl::opengl
             glad::glad)
