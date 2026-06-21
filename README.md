@@ -42,8 +42,7 @@ Holds built binaries.
 ## examples
 ### 0_link_example
 Simple example to show that the project can be linked into an application & can be consumed via Conan. \
-No functionality here just focuses on the build & dependency system implemented. \
-
+No functionality here just focuses on the build & dependency system implemented.
 ## generators
 Artefacts generated via Conan. 
 ## include
