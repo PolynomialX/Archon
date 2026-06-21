@@ -1,0 +1,9 @@
+cmake_minimum_required(VERSION 3.23)
+project(example_0)
+set(CMAKE_CXX_STANDARD 20)
+find_package(Archon)
+
+target_sources(${PROJECT_NAME}
+    PRIVATE 
+        src/main.cpp
+    )
