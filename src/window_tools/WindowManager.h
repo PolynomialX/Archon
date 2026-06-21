@@ -1,0 +1,69 @@
+#ifndef ARCHON_WINDOW_MANAGER_H
+#define ARCHON_WINDOW_MANAGER_H
+
+// Have to include glad prior to GLFW
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
+// Temp until we add log
+#include <iostream>
+#include <vector>
+#include <exception>
+#include <unordered_map>
+#include "Window.h"
+namespace archon
+{
+
+    /**
+     * @class WindowManager
+     *  Aims to orchestrate the creation, management
+     * & destruction of windows.
+     * Note, further development may be needed for multiple windows concurrently.
+     * This is merely a step in that direction.
+     */
+class WindowManager
+{
+public:
+    WindowManager();
+    virtual ~WindowManager();
+
+    /**
+     * @brief createWindow
+     *      Function used to instantiate a new window
+     *      Note this function does set the active context to this window.
+     * @param title_ - window title
+     * @param width_ - window width (pixels)
+     * @param height_ - window height (pixels)
+     */
+    void createWindow(const std::string& title_,
+                      int width_,
+                      int height_);
+    /**
+     * @brief setWindowContext
+     *        Use this function to make a chosen window the active OpenGL context...
+     * @param title_ - title of the window you want to set as the active context
+     */
+    void setWindowContext(const std::string& title_);
+    /**
+     * @brief getWindow
+     *  Currently returns a reference to a desired window
+     * @param title_ - title of desired window
+     */
+    Window& getWindow(const std::string& title_);
+private:
+
+    bool initGLAD();
+
+    // Just one window currently
+    GLFWwindow* window;
+
+    // Framebuffer size callback - to be moved?
+    static void framebuffer_size_callback(GLFWwindow* window,
+            int width,
+            int height);
+    
+    std::vector<Window> windows;
+    std::unordered_map<std::string, std::size_t> windowMap;
+};
+
+} // archon
+#endif // ARCHON_WINDOW_MANAGER_H
