@@ -25,7 +25,7 @@ class example_0(ConanFile):
         self.tool_requires("cmake/4.0.2")
 
     def requirements(self):
-        self.requires("archon/0.0.1")
+        self.requires("archon/0.0.2")
 
     def build(self):
         cmake = CMake(self)
