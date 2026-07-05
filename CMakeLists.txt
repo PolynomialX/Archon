@@ -5,22 +5,34 @@ find_package(glfw3 REQUIRED)
 find_package(glad REQUIRED)
 
 add_library(${PROJECT_NAME})
-#add_executable(Archon)
 
 target_sources(${PROJECT_NAME}
-    PRIVATE
-        src/main.cpp
-        src/window_tools/WindowManager.cpp
-        src/window_tools/Window.cpp)
+  PRIVATE
+    src/main.cpp
+    src/window_tools/WindowManager.cpp
+    src/window_tools/Window.cpp
+
+  PUBLIC
+    FILE_SET HEADERS
+    BASE_DIRS include
+    FILES
+      include/rendering/RenderOrchestrator.h
+      include/window_tools/Window.h
+      include/window_tools/WindowManager.h
+)
+
 
 target_include_directories(${PROJECT_NAME}
     PUBLIC
     include)
-
+# Explicit dependencies
 target_link_libraries(${PROJECT_NAME}
         PUBLIC
             glfw
             opengl::opengl
             glad::glad)
-
-install(TARGETS ${PROJECT_NAME})
+# Custom install command
+install(TARGETS ${PROJECT_NAME}
+    LIBRARY DESTINATION lib
+    FILE_SET HEADERS DESTINATION include
+)

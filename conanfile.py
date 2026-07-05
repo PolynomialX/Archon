@@ -7,7 +7,6 @@ from conan.tools.files import get
 
 class archon(ConanFile):
     name = "archon"
-    version = "0.0.1"
     description = """Archon - A C++ OpenGL Hobby Engine"""
     author = "Robin Andrew Holt"
     url = "https://github.com/PolynomialX/Archon"
@@ -16,10 +15,10 @@ class archon(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
     package_type = "library"
-    def source(self):
-        # Grab source from interwibble
-        get(self, "https://github.com/PolynomialX/Archon/archive/refs/heads/main.zip",
-            strip_root=True)
+    # def source(self):
+    #     # Grab source from interwibble
+    #     get(self, "https://github.com/PolynomialX/Archon/archive/refs/heads/main.zip",
+    #         strip_root=True)
 
     def generate(self):
         # This was required for my machine...
@@ -51,6 +50,10 @@ class archon(ConanFile):
         cmake = CMake(self)
         cmake.configure()
         cmake.build()
+
+    def package(self):
+        cmake = CMake(self)
+        cmake.install()
 
     def package_info(self):
         self.cpp_info.libs=["archon"]
