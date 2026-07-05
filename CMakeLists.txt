@@ -8,7 +8,6 @@ add_library(${PROJECT_NAME})
 
 target_sources(${PROJECT_NAME}
   PRIVATE
-    src/main.cpp
     src/window_tools/WindowManager.cpp
     src/window_tools/Window.cpp
 
@@ -27,7 +26,7 @@ target_include_directories(${PROJECT_NAME}
     include)
 # Explicit dependencies
 target_link_libraries(${PROJECT_NAME}
-        PUBLIC
+        PRIVATE
             glfw
             opengl::opengl
             glad::glad)

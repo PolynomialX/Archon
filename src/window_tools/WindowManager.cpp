@@ -1,3 +1,6 @@
+// Have to include glad prior to GLFW
+#include <glad/glad.h>
+#include <GLFW/glfw3.h>
 #include "window_tools/WindowManager.h"
 
 namespace archon
