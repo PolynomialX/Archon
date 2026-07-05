@@ -1,10 +1,8 @@
 #ifndef ARCHON_WINDOW_H
 #define ARCHON_WINDOW_H
 
-#include <glad/glad.h>
-#include <GLFW/glfw3.h>
+#include <memory>
 #include <string>
-#include <format>
 #include <exception>
 #include <sstream>
 #include <iostream>
@@ -27,18 +25,15 @@ public:
     void setWidth(int width_);
     int getHeight() const;
     void setHeight(int height_);
-    std::string getTitle() const;
-    GLFWwindow * getWindow();
+    const std::string& getTitle() const;
 
     // Used to print out config
     friend std::ostream& operator<<(std::ostream& os_, 
                                     const Window& window_);
 private:
-
-    int width;
-    int height;
-    std::string title;
-    GLFWwindow* window;
+    
+    class Impl;
+    std::unique_ptr<Impl> pImpl;
 };
 } // archon
 #endif // ARCHON_WINDOW_H

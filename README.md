@@ -42,9 +42,8 @@ Holds built binaries.
 ## examples
 ### 0_link_example
 Simple example to show that the project can be linked into an application & can be consumed via Conan. \
-No functionality here just focuses on the build & dependency system implemented.
-## generators
-Artefacts generated via Conan. 
+This example showcases the creation of a window of size 1000 x 1000 pixels. \
+The main aim was to test that we could successfully create & consume the Archon conan package with CMake.
 ## include
 Header files needed for Archon.
 ## src
