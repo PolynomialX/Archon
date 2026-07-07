@@ -71,3 +71,4 @@ Testing/
 
 # Conan generated artifacts
 generators/
+CMakeUserPresets.json
