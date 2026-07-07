@@ -1,10 +1,8 @@
 #ifndef ARCHON_WINDOW_MANAGER_H
 #define ARCHON_WINDOW_MANAGER_H
 
-// Temp until we add log
-#include <iostream>
+
 #include <vector>
-#include <exception>
 #include <unordered_map>
 #include "Window.h"
 namespace archon
