@@ -36,8 +36,8 @@ class archon(ConanFile):
         self.tool_requires("cmake/4.0.2")
 
     def requirements(self):
-        self.requires("glad/0.1.36", transitive_headers=True) # Later versions of glad use gl.h? Want to follow tutorial so we use this earlier version
-        self.requires("glfw/3.3.8", transitive_headers=True)
+        self.requires("glad/0.1.36") # Later versions of glad use gl.h? Want to follow tutorial so we use this earlier version
+        self.requires("glfw/3.3.8")
 
     def configure(self):
         self.options['glad'].shared = False
