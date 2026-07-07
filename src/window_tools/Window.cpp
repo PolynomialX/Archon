@@ -36,11 +36,13 @@ public:
             std::cout << "Created window with config: \n"
             << *this << std::endl;
          }
-    virtual ~Impl()
+    ~Impl()
     {
 
     }
 
+    Impl(Impl &&impl_) = default;
+    Impl(const Impl& impl_) = default;
     int getWidth() const
     {
         return width;
@@ -49,7 +51,7 @@ public:
     void setWidth(int width_)
     {
         this->width = width_;
-        glfwMakeContextCurrent(this->getWindow());
+        glfwMakeContextCurrent(this->window);
         glfwSetWindowSize(this->window, width, height);
         glViewport(0, 0, width, height);
     } 
@@ -62,7 +64,7 @@ public:
     void setHeight(int height_)
     {
         this->height = height_;
-        glfwMakeContextCurrent(this->getWindow());
+        glfwMakeContextCurrent(this->window);
         glfwSetWindowSize(this->window, width, height);
         glViewport(0, 0, width, height);
     }
@@ -70,6 +72,32 @@ public:
     const std::string& getTitle() const
     {
         return title;
+    }
+
+    void makeActive()
+    {
+        glfwMakeContextCurrent(this->window);
+    }
+
+    bool isValid()
+    {
+        if(window)
+        {
+            return true;
+        }
+        return false;
+    }
+
+    static void framebufferSizeCallback(GLFWwindow* window_,
+                                 int width_,
+                                 int height_)
+    {
+        glViewport(0, 0, width_, height_);
+    }
+
+    void setFramebufferSizeCallback()
+    {
+        glfwSetFramebufferSizeCallback(this->window, framebufferSizeCallback);
     }
 
     friend std::ostream& operator<<(std::ostream& os_, 
@@ -103,10 +131,18 @@ Window::Window(int width_,
 
 }
 
-Window::~Window()
+Window::Window(Window && window_)
 {
-    
+    this->pImpl.swap(window_.pImpl);
 }
+
+// Window::Window(const Window& window_):
+//     pImpl(window_.pImpl)
+// {
+    
+// }
+
+Window::~Window() = default;
 
 int Window::getWidth() const
 {
@@ -131,6 +167,21 @@ void Window::setHeight(int height_)
 const std::string& Window::getTitle() const
 {
     return pImpl->getTitle();
+}
+
+void Window::makeActive()
+{
+    pImpl->makeActive();
+}
+
+bool Window::isValid() const
+{
+    return pImpl->isValid();
+}
+
+void Window::setFramebufferSizeCallback()
+{
+    this->pImpl->setFramebufferSizeCallback();
 }
 
 // GLFWwindow * Window::getWindow()
