@@ -1,7 +1,11 @@
 // Have to include glad prior to GLFW
 #include <glad/glad.h>
 #include <GLFW/glfw3.h>
+#include <exception>
+// Temp until we add log
+#include <iostream>
 #include "window_tools/WindowManager.h"
+
 
 namespace archon
 {
@@ -28,10 +32,10 @@ void WindowManager::createWindow(const std::string& title_,
                     int height_)
 {
     // Add to vector & map
-    windows.push_back(Window(width_, height_, title_));
+    windows.emplace_back(width_, height_, title_);
     const std::size_t windowIdx = windows.size() - 1;
     windowMap[title_] = windowIdx;
-    if(windows[windowIdx].getWindow() == NULL)
+    if(!windows[windowIdx].isValid())
     {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -39,17 +43,22 @@ void WindowManager::createWindow(const std::string& title_,
     }
 
     // The order of this is important - must change context
-    glfwMakeContextCurrent(windows[windowIdx].getWindow());
-    // Then init glad
-    bool gladInitSuccess = initGLAD();
-    if(!gladInitSuccess)
+    windows[windowIdx].makeActive();
+    // Then init glad if this is the first window
+    if(windowIdx == 0)
     {
-        throw std::runtime_error("Failed to initialise GLAD");
+        bool gladInitSuccess = initGLAD();
+        if(!gladInitSuccess)
+        {
+            throw std::runtime_error("Failed to initialise GLAD");
+        }
     }
+
     // then we can call opengl functions
     glViewport(0, 0, windows[windowIdx].getWidth(), windows[windowIdx].getHeight());
     // Set callback function
-    glfwSetFramebufferSizeCallback(windows[windowIdx].getWindow(), framebuffer_size_callback);
+    windows[windowIdx].setFramebufferSizeCallback();
+    // glfwSetFramebufferSizeCallback(windows[windowIdx].getWindow(), framebuffer_size_callback);
 }
 
 void WindowManager::setWindowContext(const std::string& title_)
@@ -61,7 +70,7 @@ void WindowManager::setWindowContext(const std::string& title_)
                                  " CANNOT FIND WINDOW WITH TITLE: " + title_);
     }
     const std::size_t windowIdx = search->second;
-    glfwMakeContextCurrent(windows[windowIdx].getWindow());
+    windows[windowIdx].makeActive();
     glViewport(0, 0, windows[windowIdx].getWidth(), windows[windowIdx].getHeight());
 }
 
