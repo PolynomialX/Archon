@@ -11,6 +11,7 @@ target_sources(${PROJECT_NAME}
     src/window_tools/WindowManager.cpp
     src/window_tools/Window.cpp
 
+    src/rendering/RenderOrchestrator.cpp
   PUBLIC
     FILE_SET HEADERS
     BASE_DIRS include
