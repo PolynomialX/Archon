@@ -1,5 +1,6 @@
 #include <iostream>
 #include "window_tools/WindowManager.h"
+#include "rendering/RenderOrchestrator.h"
 int main()
 {
     std::cout << "Hello from example_0" << std::endl;
@@ -10,7 +11,7 @@ int main()
     windowManager.createWindow(windowTitle, width, height);
     // From this I think createWindow should return a reference to the newly created window.
     // I also think the WindowManager should store unique pointers to windows to express ownership
-    const auto& exampleWindow = windowManager.getWindow(windowTitle);
+    auto& exampleWindow = windowManager.getWindow(windowTitle);
     if(exampleWindow.isValid())
     {
         std::cout << "Hurray valid window!" << std::endl;
@@ -19,6 +20,9 @@ int main()
     {
         std::cout << "Invalid window! Oh dear!" << std::endl;
     }
+    
+   archon::RenderOrchestrator::simpleRenderLoop(exampleWindow);
+
     // We need threading to handle multiple windows at once but the code is here.
     // We will focus on just rendering to a singular window for the time being.
     // while(!glfwWindowShouldClose(windowManager.getWindow("example_0").getWindow()))
