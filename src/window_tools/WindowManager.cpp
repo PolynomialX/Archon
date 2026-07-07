@@ -99,10 +99,10 @@ bool WindowManager::initGLAD()
     return success;
 }
 
-void WindowManager::framebuffer_size_callback(GLFWwindow* window,
-        int width,
-        int height)
-{
-    glViewport(0, 0, width, height);
-}
+// void WindowManager::framebuffer_size_callback(GLFWwindow* window,
+//         int width,
+//         int height)
+// {
+//     glViewport(0, 0, width, height);
+// }
 } // archon
