@@ -49,9 +49,9 @@ private:
     bool initGLAD();
 
     // Framebuffer size callback - to be moved?
-    static void framebuffer_size_callback(GLFWwindow* window,
-            int width,
-            int height);
+    // static void framebuffer_size_callback(GLFWwindow* window,
+    //         int width,
+    //         int height);
     
     std::vector<Window> windows;
     std::unordered_map<std::string, std::size_t> windowMap;
