@@ -100,6 +100,16 @@ public:
         glfwSetFramebufferSizeCallback(this->window, framebufferSizeCallback);
     }
 
+    bool shouldClose()
+    {
+        return glfwWindowShouldClose(this->window);
+    }
+
+    void swapBuffers()
+    {
+        glfwSwapBuffers(this->window);
+    }
+
     friend std::ostream& operator<<(std::ostream& os_, 
                                 const Impl& impl_)
     {
@@ -169,6 +179,11 @@ const std::string& Window::getTitle() const
     return pImpl->getTitle();
 }
 
+bool Window::shouldClose()
+{
+    return pImpl->shouldClose();
+}
+
 void Window::makeActive()
 {
     pImpl->makeActive();
@@ -182,6 +197,11 @@ bool Window::isValid() const
 void Window::setFramebufferSizeCallback()
 {
     this->pImpl->setFramebufferSizeCallback();
+}
+
+void Window::swapBuffers()
+{
+    this->pImpl->swapBuffers();
 }
 
 // GLFWwindow * Window::getWindow()

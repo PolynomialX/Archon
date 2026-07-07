@@ -31,10 +31,12 @@ public:
     int getHeight() const;
     void setHeight(int height_);
     const std::string& getTitle() const;
+    bool shouldClose();
     // Make this window the current context
     void makeActive();
     bool isValid() const;
     void setFramebufferSizeCallback();
+    void swapBuffers();
     // Used to print out config
     friend std::ostream& operator<<(std::ostream& os_, 
                                     const Window& window_);
