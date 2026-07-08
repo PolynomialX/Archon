@@ -5,6 +5,10 @@
 namespace archon
 {
 
+/**
+ * @class Window::Impl
+ * @brief OpenGL implementation of the Window object.
+ */
 class Window::Impl
 {
 public:
@@ -15,34 +19,35 @@ public:
             height(height_),
             title(title_),
             window(nullptr)
-         {
-            window = glfwCreateWindow(width,
-                        height,
-                        title.c_str(),
-                        NULL,
-                        NULL);
+    {
+        window = glfwCreateWindow(width,
+                    height,
+                    title.c_str(),
+                    NULL,
+                    NULL);
+        // Check for faults
+        if(window == nullptr)
+        {
+            std::string errorMsg = 
+            "Failed to create window for the following config: ";
+            std::stringstream ss;
+            ss << errorMsg << *this;
+            throw std::runtime_error(ss.str());
+        }
+        // Print out window config
+        std::cout << "Created window with config: \n"
+        << *this << std::endl;
+    }
 
-            // Check for faults
-            if(window == nullptr)
-            {
-                std::string errorMsg = 
-                "Failed to create window for the following config: ";
-                std::stringstream ss;
-                ss << errorMsg << *this;
-                throw std::runtime_error(ss.str());
-            }
-
-            // Print out window config
-            std::cout << "Created window with config: \n"
-            << *this << std::endl;
-         }
     ~Impl()
     {
 
     }
 
     Impl(Impl &&impl_) = default;
+
     Impl(const Impl& impl_) = default;
+
     int getWidth() const
     {
         return width;
@@ -124,6 +129,7 @@ public:
         impl_.getHeight());
         return os_ << windowConfigStr;
     }
+    
 private:
     int width;
     int height;
@@ -145,12 +151,6 @@ Window::Window(Window && window_)
 {
     this->pImpl.swap(window_.pImpl);
 }
-
-// Window::Window(const Window& window_):
-//     pImpl(window_.pImpl)
-// {
-    
-// }
 
 Window::~Window() = default;
 
@@ -203,11 +203,6 @@ void Window::swapBuffers()
 {
     this->pImpl->swapBuffers();
 }
-
-// GLFWwindow * Window::getWindow()
-// {
-//     return window;
-// }
 
 std::ostream& operator<<(std::ostream& os_,
                                  const Window& window_)
