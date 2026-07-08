@@ -52,3 +52,12 @@ Holds the implementation files for Archon.
 Instructs CMake how to compile the library.
 ## conanfile.py
 Describes the dependenies needed by Conan & how to build / package the library.
+## conan_history
+A history of the library's Conan packages.
+Utilise `conan cache restore /path/to/conan_cache_save.tgz` to load this into the Conan Cache. \
+Once loaded, the examples should be able to find and use them. \
+Before running the examples, consult the `Conanfile.py` to see which package is needed.
+# Release History
+|Version|Date|Details|
+|---|---|---|
+|0.0.2|08 Jul 2026| First usable Conan package. Functionality to open a window & rudimental render loop that keeps the window open until exit button is used.|
