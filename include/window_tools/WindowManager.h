@@ -1,7 +1,6 @@
 #ifndef ARCHON_WINDOW_MANAGER_H
 #define ARCHON_WINDOW_MANAGER_H
 
-
 #include <vector>
 #include <unordered_map>
 #include "Window.h"
@@ -45,15 +44,16 @@ public:
      */
     Window& getWindow(const std::string& title_);
 private:
-
+    /**
+     * @brief initGLAD
+     *        Method to initialise GLAD. Must be called *after* a window is created.
+     * @return bool - flags whether initialisation was successful.
+     */
     bool initGLAD();
-
-    // Framebuffer size callback - to be moved?
-    // static void framebuffer_size_callback(GLFWwindow* window,
-    //         int width,
-    //         int height);
-    
+    // Actual store of Window objects
+    // TODO: Make it a vector of unique_ptrs
     std::vector<Window> windows;
+    // Mapping from Window titles -> indices.
     std::unordered_map<std::string, std::size_t> windowMap;
 };
 

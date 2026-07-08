@@ -33,8 +33,11 @@ void WindowManager::createWindow(const std::string& title_,
 {
     // Add to vector & map
     windows.emplace_back(width_, height_, title_);
+    // Get idx
     const std::size_t windowIdx = windows.size() - 1;
+    // Set in map
     windowMap[title_] = windowIdx;
+    // Check 
     if(!windows[windowIdx].isValid())
     {
         std::cout << "Failed to create GLFW window" << std::endl;
@@ -58,7 +61,6 @@ void WindowManager::createWindow(const std::string& title_,
     glViewport(0, 0, windows[windowIdx].getWidth(), windows[windowIdx].getHeight());
     // Set callback function
     windows[windowIdx].setFramebufferSizeCallback();
-    // glfwSetFramebufferSizeCallback(windows[windowIdx].getWindow(), framebuffer_size_callback);
 }
 
 void WindowManager::setWindowContext(const std::string& title_)
@@ -99,10 +101,4 @@ bool WindowManager::initGLAD()
     return success;
 }
 
-// void WindowManager::framebuffer_size_callback(GLFWwindow* window,
-//         int width,
-//         int height)
-// {
-//     glViewport(0, 0, width, height);
-// }
 } // archon
