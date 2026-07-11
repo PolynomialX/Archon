@@ -34,6 +34,7 @@ class archon(ConanFile):
     def requirements(self):
         self.requires("glad/0.1.36") # Later versions of glad use gl.h? Want to follow tutorial so we use this earlier version
         self.requires("glfw/3.3.8")
+        self.requires("quill/12.0.0")
 
     def configure(self):
         self.options['glad'].shared = False
