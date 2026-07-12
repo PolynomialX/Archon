@@ -16,9 +16,9 @@ target_sources(${PROJECT_NAME}
     FILE_SET HEADERS
     BASE_DIRS include
     FILES
-      include/rendering/RenderOrchestrator.h
-      include/window_tools/Window.h
-      include/window_tools/WindowManager.h
+      include/rendering/RenderOrchestrator.hpp
+      include/window_tools/Window.hpp
+      include/window_tools/WindowManager.hpp
 )
 
 
