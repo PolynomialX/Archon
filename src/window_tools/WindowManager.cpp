@@ -32,13 +32,13 @@ void WindowManager::createWindow(const std::string& title_,
                     int height_)
 {
     // Add to vector & map
-    windows.emplace_back(width_, height_, title_);
+    windows.emplace_back(std::make_unique<Window>(width_, height_, title_));
     // Get idx
     const std::size_t windowIdx = windows.size() - 1;
     // Set in map
     windowMap[title_] = windowIdx;
     // Check 
-    if(!windows[windowIdx].isValid())
+    if(!windows[windowIdx]->isValid())
     {
         std::cout << "Failed to create GLFW window" << std::endl;
         glfwTerminate();
@@ -46,7 +46,7 @@ void WindowManager::createWindow(const std::string& title_,
     }
 
     // The order of this is important - must change context
-    windows[windowIdx].makeActive();
+    windows[windowIdx]->makeActive();
     // Then init glad if this is the first window
     if(windowIdx == 0)
     {
@@ -58,9 +58,12 @@ void WindowManager::createWindow(const std::string& title_,
     }
 
     // then we can call opengl functions
-    glViewport(0, 0, windows[windowIdx].getWidth(), windows[windowIdx].getHeight());
+    glViewport(0, 
+               0, 
+               windows[windowIdx]->getWidth(), 
+               windows[windowIdx]->getHeight());
     // Set callback function
-    windows[windowIdx].setFramebufferSizeCallback();
+    windows[windowIdx]->setFramebufferSizeCallback();
 }
 
 void WindowManager::setWindowContext(const std::string& title_)
@@ -72,8 +75,7 @@ void WindowManager::setWindowContext(const std::string& title_)
                                  " CANNOT FIND WINDOW WITH TITLE: " + title_);
     }
     const std::size_t windowIdx = search->second;
-    windows[windowIdx].makeActive();
-    glViewport(0, 0, windows[windowIdx].getWidth(), windows[windowIdx].getHeight());
+    windows[windowIdx]->makeActive();
 }
 
 Window& WindowManager::getWindow(const std::string& title_)
@@ -86,7 +88,9 @@ Window& WindowManager::getWindow(const std::string& title_)
                                 "::ERROR CANNOT FIND WINDOW WITH"
                                 "TITLE " + title_);
     }
-    return windows[search->second];
+    // Is this safe?
+    // Think so - needs documenting or having a look at?
+    return *windows[search->second].get();
 }
 
 bool WindowManager::initGLAD()

@@ -2,6 +2,7 @@
 #define ARCHON_WINDOW_MANAGER_H
 
 #include <vector>
+#include <memory>
 #include <unordered_map>
 #include "Window.h"
 namespace archon
@@ -52,7 +53,7 @@ private:
     bool initGLAD();
     // Actual store of Window objects
     // TODO: Make it a vector of unique_ptrs
-    std::vector<Window> windows;
+    std::vector<std::unique_ptr<Window> > windows;
     // Mapping from Window titles -> indices.
     std::unordered_map<std::string, std::size_t> windowMap;
 };
