@@ -6,6 +6,8 @@
 #include <sstream>
 namespace archon
 {
+namespace window_tools
+{
 namespace archon_gl
 {
 
@@ -207,4 +209,5 @@ void GLWindow::swapBuffers()
 }
 
 } // archon_gl
+} // window_tools
 } // archon
