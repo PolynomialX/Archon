@@ -13,6 +13,7 @@ namespace archon_gl
 
 class GLWindowFactory: public WindowFactory
 {
+public:
     GLWindowFactory();
     virtual ~GLWindowFactory();
     virtual std::unique_ptr<WindowBase> createWindow(const int width_,

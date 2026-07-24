@@ -4,11 +4,12 @@
 namespace archon
 {
 
-void RenderOrchestrator::simpleRenderLoop(Window& windowToRenderTo_)
+void RenderOrchestrator::simpleRenderLoop(window_tools::WindowBase& windowToRenderTo_)
 {
     while(!windowToRenderTo_.shouldClose())
     {
         windowToRenderTo_.swapBuffers();
+        // This needs to be generic but will do for now
         glfwPollEvents();
     }
 }
