@@ -9,7 +9,8 @@
 
 namespace archon
 {
-
+namespace window_tools
+{
 WindowManager::WindowManager()
 {
     std::cout << "Creating an instance of WindowManager\n";
@@ -105,4 +106,5 @@ bool WindowManager::initGLAD()
     return success;
 }
 
+} // window_tools
 } // archon

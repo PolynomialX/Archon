@@ -7,7 +7,8 @@
 #include "Window.h"
 namespace archon
 {
-
+namespace window_tools
+{
     /**
      * @class WindowManager
      *  Aims to orchestrate the creation, management
@@ -58,5 +59,6 @@ private:
     std::unordered_map<std::string, std::size_t> windowMap;
 };
 
+} // window_tools
 } // archon
 #endif // ARCHON_WINDOW_MANAGER_H

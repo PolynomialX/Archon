@@ -4,7 +4,8 @@
 #include <format>
 namespace archon
 {
-
+namespace window_tools
+{
 /**
  * @class Window::Impl
  * @brief OpenGL implementation of the Window object.
@@ -82,6 +83,10 @@ public:
     void makeActive()
     {
         glfwMakeContextCurrent(this->window);
+        glViewport(0,
+                   0,
+                   this->width,
+                   this->height);
     }
 
     bool isValid()
@@ -211,5 +216,5 @@ std::ostream& operator<<(std::ostream& os_,
 }
 
 
-
+} // window_tools
 } // archon
