@@ -8,17 +8,18 @@ add_library(${PROJECT_NAME})
 
 target_sources(${PROJECT_NAME}
   PRIVATE
-    src/window_tools/WindowManager.cpp
-    src/window_tools/Window.cpp
-
+    src/window_tools/GLWindow.cpp
+    src/window_tools/GLWindowFactory.cpp
     src/rendering/RenderOrchestrator.cpp
   PUBLIC
     FILE_SET HEADERS
     BASE_DIRS include
     FILES
       include/rendering/RenderOrchestrator.h
-      include/window_tools/Window.h
-      include/window_tools/WindowManager.h
+      include/window_tools/GLWindowFactory.h
+      include/window_tools/WindowBase.h
+      include/window_tools/WindowFactory.h
+      include/window_tools/GLWindow.h
 )
 
 

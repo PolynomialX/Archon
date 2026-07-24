@@ -15,10 +15,6 @@ class archon(ConanFile):
     options = {"shared": [True, False], "fPIC": [True, False]}
     default_options = {"shared": False, "fPIC": True}
     package_type = "library"
-    # def source(self):
-    #     # Grab source from interwibble
-    #     get(self, "https://github.com/PolynomialX/Archon/archive/refs/heads/main.zip",
-    #         strip_root=True)
 
     def generate(self):
         # This was required for my machine...

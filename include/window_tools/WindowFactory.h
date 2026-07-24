@@ -1,7 +1,6 @@
 #ifndef ARCHON_WINDOW_TOOLS_WINDOW_FACTORY_H_
 #define ARCHON_WINDOW_TOOLS_WINDOW_FACTORY_H_
 #include "window_tools/WindowBase.h"
-#include "general/GraphicsAPIEnums.h"
 #include <memory>
 #include <string>
 namespace archon
