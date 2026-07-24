@@ -4,6 +4,9 @@
 #include <string>
 namespace archon
 {
+namespace window_tools
+{
+
 /**
  * Needs comments and cleaning up
  */
@@ -24,6 +27,7 @@ public:
 private:
 };
 
+} // window_tools
 } // archon
 
 
