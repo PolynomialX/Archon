@@ -12,6 +12,9 @@
  */
 namespace archon
 {
+namespace window_tools
+{
+
 class Window
 {
 public:
@@ -115,6 +118,7 @@ public:
     /**
      * @brief Overriden output operator
      *        Prints to an ostream the config of the window
+     *  MAKE THIS A NON MEMBER FUNCTION
      * @return ostream object
      */
     friend std::ostream& operator<<(std::ostream& os_, 
@@ -129,6 +133,7 @@ private:
 
 };
 
+} // window_tools
 } // archon
 
 #endif // ARCHON_WINDOW_H
