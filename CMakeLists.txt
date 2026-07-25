@@ -17,7 +17,7 @@ target_sources(${PROJECT_NAME}
     FILES
       include/rendering/RenderOrchestrator.h
       include/window_tools/GLWindowFactory.h
-      include/window_tools/WindowBase.h
+      include/window_tools/Window.h
       include/window_tools/WindowFactory.h
       include/window_tools/GLWindow.h
 )

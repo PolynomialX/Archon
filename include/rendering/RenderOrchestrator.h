@@ -10,7 +10,7 @@ public:
     RenderOrchestrator() = default;
     ~RenderOrchestrator() = default;
 
-    static void simpleRenderLoop(window_tools::WindowBase& windowToRenderTo_);
+    static void simpleRenderLoop(window_tools::Window& windowToRenderTo_);
 private:
 
 };

@@ -21,7 +21,7 @@ GLWindowFactory::~GLWindowFactory()
     glfwTerminate();
 }
 
-std::unique_ptr<WindowBase> GLWindowFactory::createWindow(int width_,
+std::unique_ptr<Window> GLWindowFactory::createWindow(int width_,
                                                           int height_,
                                                           const std::string& title_)
 {
