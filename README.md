@@ -60,4 +60,5 @@ Before running the examples, consult the `Conanfile.py` to see which package is 
 # Release History
 |Version|Date|Details|
 |---|---|---|
+|0.0.3|25 Jul 2026| Upgraded software design - changed to using a window factory instead of window manager class - still all WIP|
 |0.0.2|08 Jul 2026| First usable Conan package. Functionality to open a window & rudimental render loop that keeps the window open until exit button is used.|
