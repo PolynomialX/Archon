@@ -1,7 +1,7 @@
 #ifndef ARCHON_WINDOW_TOOLS_GL_WINDOW_H_
 #define ARCHON_WINDOW_TOOLS_GL_WINDOW_H_
 
-#include "window_tools/WindowBase.h"
+#include "window_tools/Window.h"
 #include <memory>
 namespace archon
 {
@@ -11,7 +11,7 @@ namespace window_tools
 namespace archon_gl
 {
 
-class GLWindow : public WindowBase
+class GLWindow : public Window
 {
 public:
     GLWindow(int width_,

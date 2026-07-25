@@ -4,7 +4,7 @@
 namespace archon
 {
 
-void RenderOrchestrator::simpleRenderLoop(window_tools::WindowBase& windowToRenderTo_)
+void RenderOrchestrator::simpleRenderLoop(window_tools::Window& windowToRenderTo_)
 {
     while(!windowToRenderTo_.shouldClose())
     {

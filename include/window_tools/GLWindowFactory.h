@@ -16,7 +16,7 @@ class GLWindowFactory: public WindowFactory
 public:
     GLWindowFactory();
     virtual ~GLWindowFactory();
-    virtual std::unique_ptr<WindowBase> createWindow(const int width_,
+    virtual std::unique_ptr<Window> createWindow(const int width_,
                                                      const int height_,
                                                      const std::string& title_) override;
 };
