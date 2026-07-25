@@ -21,7 +21,7 @@ public:
     /**
      * 
      */
-    explicit QuillLogger(const std::string& loggerName_);
+    explicit QuillLogger(const std::string& loggerHandle_);
     ~QuillLogger();
 
     virtual void logInfo(const std::string& infoMsg_) override;
