@@ -3,6 +3,7 @@ project(archon)
 set(CMAKE_CXX_STANDARD 20)
 find_package(glfw3 REQUIRED)
 find_package(glad REQUIRED)
+find_package(quill REQUIRED)
 
 add_library(${PROJECT_NAME})
 
@@ -11,6 +12,7 @@ target_sources(${PROJECT_NAME}
     src/window_tools/GLWindow.cpp
     src/window_tools/GLWindowFactory.cpp
     src/rendering/RenderOrchestrator.cpp
+    src/general/logging/QuillLogger.cpp
   PUBLIC
     FILE_SET HEADERS
     BASE_DIRS include
@@ -20,6 +22,8 @@ target_sources(${PROJECT_NAME}
       include/window_tools/Window.h
       include/window_tools/WindowFactory.h
       include/window_tools/GLWindow.h
+      include/general/logging/ILogger.h
+      include/general/logging/QuillLogger.h
 )
 
 
@@ -31,7 +35,8 @@ target_link_libraries(${PROJECT_NAME}
         PRIVATE
             glfw
             opengl::opengl
-            glad::glad)
+            glad::glad
+            quill::quill)
 # Custom install command
 install(TARGETS ${PROJECT_NAME}
     LIBRARY DESTINATION lib
